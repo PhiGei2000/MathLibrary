@@ -45,16 +45,3 @@ double Term::getValue() const {
 		return 0;
 	}
 }
-
-ValueTerm::ValueTerm(double value)
-	: m_value{ value }, Term{} {
-
-}
-
-bool ValueTerm::isConstant() const {
-	return true;
-}
-
-double ValueTerm::getValue() const {
-	return m_value;
-}

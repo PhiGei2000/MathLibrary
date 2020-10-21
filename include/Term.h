@@ -17,14 +17,3 @@ public:
 
 	virtual double getValue() const;
 };
-
-struct ValueTerm : public Term {
-private:
-	double m_value = 0;
-
-public:
-	ValueTerm(double value);
-
-	bool isConstant() const override;
-	double getValue() const override;
-};

@@ -1,4 +1,6 @@
 #include "../include/TermParser.h"
+#include "../include/Value.h"
+#include "../include/Varable.h"
 
 Term* TermParser::parseSum(const std::string& str) {
 	size_t end = std::min(str.find('+'), str.find('-'));
@@ -14,7 +16,7 @@ Term* TermParser::parseSum(const std::string& str) {
 		Term* rest = parseSum(restStr);
 
 		if (str[end] == '-') {
-			return new Term(Operator::ADD, prod, new Term(Operator::MUL, new ValueTerm(-1), rest));
+			return new Term(Operator::ADD, prod, new Term(Operator::MUL, new Value(-1), rest));
 		}
 		else {
 			return new Term(Operator::ADD, prod, rest);
@@ -24,7 +26,7 @@ Term* TermParser::parseSum(const std::string& str) {
 		return parseProduct(str);
 	}
 	else {
-		return new ValueTerm(0);
+		return new Value(0);
 	}
 }
 
@@ -39,7 +41,7 @@ Term* TermParser::parseProduct(const std::string& str) {
 		Term* rest = parseProduct(restStr);
 
 		if (str[end] == '/') {
-			return new Term(Operator::MUL, exp, new Term(Operator::POW, rest, new ValueTerm(-1)));
+			return new Term(Operator::MUL, exp, new Term(Operator::POW, rest, new Value(-1)));
 		}
 		else {
 			return new Term(Operator::MUL, exp, rest);
@@ -49,7 +51,7 @@ Term* TermParser::parseProduct(const std::string& str) {
 		return parseExponentiation(str);
 	}
 	else {
-		return new ValueTerm(1);
+		return new Value(1);
 	}
 }
 
@@ -81,7 +83,7 @@ Term* TermParser::parseExponentiation(const std::string& str) {
 		}
 	}
 	else {
-		return new ValueTerm(1);
+		return new Value(1);
 	}
 }
 
@@ -131,7 +133,7 @@ Term* TermParser::parseBrackets(const std::string& str) {
 }
 
 Term* TermParser::parseValue(const std::string& str) {
-	return new ValueTerm(std::stod(str));
+	return new Value(std::stod(str));
 }
 
 Term* TermParser::parse(const std::string& str) {
