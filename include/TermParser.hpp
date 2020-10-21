@@ -1,5 +1,5 @@
 #pragma once
-#include "../include/Term.h"
+#include "../include/Term.hpp"
 
 #include <string>
 #include <vector>

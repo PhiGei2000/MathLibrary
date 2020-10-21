@@ -1,4 +1,4 @@
-#include "../include/TermParser.h"
+#include "../include/TermParser.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -13,6 +13,9 @@ int main()
 
         if (term->isConstant()) {
             std::cout << term->getValue() << std::endl;
+        }
+        else {
+            std::cout << term->toString() << std::endl;
         }
     }
 }
